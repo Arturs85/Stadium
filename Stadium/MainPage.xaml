@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="Stadium.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Stadium"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    mc:Ignorable="d"
+    Unloaded="Page_Unloaded"
+    >
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+              
+        <canvas:CanvasAnimatedControl x:Name="canvas" Draw="canvas_Draw_1" CreateResources="canvas_CreateResources" Update="canvas_Update"/>
+        <StackPanel x:Name="contentPanel" Margin="120,30,0,472">
+            <TextBlock HorizontalAlignment="Left" Text="Artūrs Ardavs RDBR011 II DITF RTU" FontSize="14"/>
+           
+            <StackPanel x:Name="inputPanel" Orientation="Horizontal" Margin="0,20,0,20">
+                <TextBox x:Name="nameInput" Width="300" HorizontalAlignment="Left"/>
+                <Button x:Name="inputButton" Content="Start" Click="inputButton_Click"/>
+            </StackPanel>
+            <TextBlock x:Name="greetingOutput"/>
+                </StackPanel>
+
+            
+
+    </Grid>
+    
+</Page>
