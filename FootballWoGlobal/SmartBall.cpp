@@ -4,10 +4,10 @@
 #include "Ball.h"
 # include "MainPage.xaml.h" 
 //extern MainPage^ mainPage;
-SmartBall::SmartBall(Microsoft::Graphics::Canvas::CanvasRenderTarget^ rt, Field* field, int r,Ball* ball) : Ball(rt, field, r)
+SmartBall::SmartBall(Microsoft::Graphics::Canvas::CanvasRenderTarget^ rt, Field* field, int r, Ball* ball) : Ball(rt, field, r)
 {
 	slowdown = 0;
-	speed = 3;
+	speed = 4;
 	this->ball = ball;
 	//ball->getCoord(ba, ballY);
 	x = 100;
@@ -38,15 +38,15 @@ void SmartBall::move() {
 
 
 
-	if ( willColide) {
-		
-	x -= speed*cos(dir);
-	y += speed*sin(dir);
-	ball->setDir(dir+0.2);
-	ball->setSpeed(40);
+	if (willColide) {
 
-}
-		
+		x -= speed*cos(dir);
+		y += speed*sin(dir);
+		ball->setDir(dir + 0.2);
+		ball->setSpeed(40);
 
-	
+	}
+
+
+
 }

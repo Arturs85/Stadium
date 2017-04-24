@@ -7,6 +7,22 @@
 //------------------------------------------------------------------------------
 
 
+namespace Windows {
+    namespace UI {
+        namespace Xaml {
+            namespace Controls {
+                ref class StackPanel;
+                ref class RelativePanel;
+                ref class Grid;
+                ref class CheckBox;
+                ref class TextBox;
+                ref class Slider;
+                ref class TextBlock;
+                ref class Button;
+            }
+        }
+    }
+}
 namespace Microsoft {
     namespace Graphics {
         namespace Canvas {
@@ -14,18 +30,6 @@ namespace Microsoft {
                 namespace Xaml {
                     ref class CanvasAnimatedControl;
                 }
-            }
-        }
-    }
-}
-namespace Windows {
-    namespace UI {
-        namespace Xaml {
-            namespace Controls {
-                ref class StackPanel;
-                ref class TextBlock;
-                ref class TextBox;
-                ref class Button;
             }
         }
     }
@@ -46,12 +50,37 @@ namespace Stadium
     private:
         bool _contentLoaded;
     
-        private: ::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ canvas;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ contentPanel;
+        private: ::Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ canvas;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ inputPanel;
-        private: ::Windows::UI::Xaml::Controls::TextBlock^ greetingOutput;
-        private: ::Windows::UI::Xaml::Controls::TextBox^ nameInput;
-        private: ::Windows::UI::Xaml::Controls::Button^ inputButton;
+        private: ::Windows::UI::Xaml::Controls::RelativePanel^ buttonPanel;
+        private: ::Windows::UI::Xaml::Controls::RelativePanel^ sliderPanel;
+        private: ::Windows::UI::Xaml::Controls::RelativePanel^ teamsControlPanel;
+        private: ::Windows::UI::Xaml::Controls::RelativePanel^ team1Panel;
+        private: ::Windows::UI::Xaml::Controls::RelativePanel^ Team2Panel;
+        private: ::Windows::UI::Xaml::Controls::Grid^ PlayersInGameGrid;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT1P2;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT1P3;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT1P4;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT1P5;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT1P6;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT2P2;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT2P3;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT2P4;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT2P5;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxT2P6;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ textEnergyTeam2;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ textScoreTeam2;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ textEnergyTeam1;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ textScoreTeam1;
+        private: ::Windows::UI::Xaml::Controls::Slider^ slider;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxPauseShow;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ checkBoxSound;
+        private: ::Windows::UI::Xaml::Controls::Button^ startButton;
+        private: ::Windows::UI::Xaml::Controls::Button^ stopButton;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlockTime;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlockComent;
     };
 }
 

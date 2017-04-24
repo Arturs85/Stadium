@@ -8,6 +8,9 @@
       <UniqueIdentifier>596014b5-e27d-49fd-8ebf-a7a3e16df1d7</UniqueIdentifier>
       <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
     </Filter>
+    <Filter Include="Humans">
+      <UniqueIdentifier>{a4e43912-8c62-40c8-ab5b-f7e20dd89b48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -19,6 +22,37 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="SmartBall.cpp" />
+    <ClCompile Include="Human.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Referee.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Goalkeeper.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Forward.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="HalfBack.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="FullBack.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="AssReferee.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
+    <ClCompile Include="Girl.cpp">
+      <Filter>Humans</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -27,6 +61,37 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="SmartBall.h" />
+    <ClInclude Include="Human.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Referee.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Goalkeeper.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Forward.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="HalfBack.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="FullBack.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="AssReferee.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
+    <ClInclude Include="Girl.h">
+      <Filter>Humans</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">

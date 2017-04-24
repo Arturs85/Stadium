@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9076d637-2ba8-4126-b34a-de25435d27c9}</ProjectGuid>
-    <RootNamespace>Stadium</RootNamespace>
+    <ProjectGuid>{ef8706b6-0ad9-418f-ba9d-dd71ae156485}</ProjectGuid>
+    <RootNamespace>FootballWoGlobal</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -97,7 +97,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <PackageCertificateKeyFile>Stadium_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>FootballWoGlobal_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -136,17 +136,9 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AssReferee.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Field.h" />
-    <ClInclude Include="Forward.h" />
-    <ClInclude Include="FullBack.h" />
-    <ClInclude Include="Functions.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Girl.h" />
-    <ClInclude Include="Goalkeeper.h" />
-    <ClInclude Include="HalfBack.h" />
-    <ClInclude Include="Human.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -154,8 +146,6 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Referee.h" />
     <ClInclude Include="SmartBall.h" />
   </ItemGroup>
   <ItemGroup>
@@ -170,8 +160,8 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="FootballWoGlobal_TemporaryKey.pfx" />
     <None Include="packages.config" />
-    <None Include="Stadium_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
@@ -186,17 +176,9 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="AssReferee.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Field.cpp" />
-    <ClCompile Include="Forward.cpp" />
-    <ClCompile Include="FullBack.cpp" />
-    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Girl.cpp" />
-    <ClCompile Include="Goalkeeper.cpp" />
-    <ClCompile Include="HalfBack.cpp" />
-    <ClCompile Include="Human.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
@@ -208,8 +190,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Referee.cpp" />
     <ClCompile Include="SmartBall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

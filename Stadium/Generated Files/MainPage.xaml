@@ -11,21 +11,82 @@
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-              
-        <canvas:CanvasAnimatedControl x:ConnectionId='2' x:Name="canvas"                                                                                     />
-        <StackPanel x:ConnectionId='3' x:Name="contentPanel" Margin="120,30,0,472">
-            <TextBlock HorizontalAlignment="Left" Text="Artūrs Ardavs RDBR011 II DITF RTU" FontSize="14"/>
-           
-            <StackPanel x:ConnectionId='4' x:Name="inputPanel" Orientation="Horizontal" Margin="0,20,0,20">
-                <TextBox x:ConnectionId='6' x:Name="nameInput" Width="300" HorizontalAlignment="Left"/>
-                <Button x:ConnectionId='7' x:Name="inputButton" Content="Start"                          />
-            </StackPanel>
-            <TextBlock x:ConnectionId='5' x:Name="greetingOutput"/>
-                </StackPanel>
 
-            
+        <StackPanel x:ConnectionId='2' x:Name="contentPanel" Margin="120,30,0,472">
+            <canvas:CanvasAnimatedControl x:ConnectionId='3' x:Name="canvas"                                                                                      Margin="-65,-15,-1215,-705"/>
+
+            <StackPanel x:ConnectionId='4' x:Name="inputPanel" Orientation="Horizontal" Margin="0,0,0,20" Height="99">
+                <RelativePanel x:ConnectionId='5' x:Name="buttonPanel" Width="250" >
+                    <Button x:ConnectionId='29' x:Name="startButton" Content="Start"                           Height="40" Margin="10,11,-10,-11"/>
+                    <Button x:ConnectionId='30' x:Name="stopButton" Content="Stop" Height="40" Width="54"                          Margin="71,11,-71,-11"/>
+                    <TextBlock x:ConnectionId='31' x:Name="textBlockTime" TextWrapping="Wrap" Text="TextBlock" Margin="145,20,-173,-1"/>
+                    <TextBlock x:ConnectionId='32' x:Name="textBlockComent" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Margin="0,56,-138,-69"/>
+                </RelativePanel>
+                <RelativePanel x:ConnectionId='6' x:Name="sliderPanel" HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="270" Margin="0,0,0,-1">
+                    <Slider x:ConnectionId='25' x:Name="slider" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Margin="65,3,-134,-1"                                    Height="42"/>
+                    <TextBlock x:ConnectionId='26' x:Name="textBlock" HorizontalAlignment="Left" Height="47" TextWrapping="Wrap" Text="Game Speed" VerticalAlignment="Top" Width="80" Margin="10,0,-28,-27"/>
+                    <CheckBox x:ConnectionId='27' x:Name="checkBoxPauseShow" Content="Pause Show" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="90" Margin="0,60,0,-52" RenderTransformOrigin="0.5,0.5"/>
+                    <CheckBox x:ConnectionId='28' x:Name="checkBoxSound" Content="Sound" HorizontalAlignment="Right" Height="30" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.5,0.5" Margin="0,60,-260,-60"/>
+
+                </RelativePanel>
+                <RelativePanel x:ConnectionId='7' x:Name="teamsControlPanel" Height="100" Width="381" Margin="0,0,0,-1">
+                    <RelativePanel x:ConnectionId='8' x:Name="team1Panel" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="245" Margin="0,0,-245,-50">
+                        <TextBox x:ConnectionId='23' x:Name="textEnergyTeam1" HorizontalAlignment="Right" Margin="0,0,-140,-44" Height="50" VerticalAlignment="Top" />
+                        <TextBox x:ConnectionId='24' x:Name="textScoreTeam1" HorizontalAlignment="Left" Margin="0,0,-140,-44" Height="50" VerticalAlignment="Top" />
+
+                    </RelativePanel>
+                    <RelativePanel x:ConnectionId='9' x:Name="Team2Panel" HorizontalAlignment="Left" Height="50" VerticalAlignment="Bottom" Width="245" Margin="0,0,-245,-100">
+                        <TextBox x:ConnectionId='21' x:Name="textEnergyTeam2"  HorizontalAlignment="Right" Margin="0,0,-140,-44" Height="50" VerticalAlignment="Top" />
+                        <TextBox x:ConnectionId='22' x:Name="textScoreTeam2"  HorizontalAlignment="Left" Margin="0,0,-140,-44" Height="50" VerticalAlignment="Top" />
+
+
+                    </RelativePanel>
+                    <Grid x:ConnectionId='10' x:Name="PlayersInGameGrid" HorizontalAlignment="Right" Height="100" VerticalAlignment="Top" Width="225" Margin="0,0,-381,-97" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="2" Margin="10" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="3" Margin="10" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="4" Margin="10" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="5" Margin="10" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Grid.Column="4" Text="6" Margin="10" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <CheckBox x:ConnectionId='11' x:Name="checkBoxT1P2" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='12' x:Name="checkBoxT1P3" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='13' x:Name="checkBoxT1P4" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='14' x:Name="checkBoxT1P5" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='15' x:Name="checkBoxT1P6" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='16' x:Name="checkBoxT2P2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='17' x:Name="checkBoxT2P3" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='18' x:Name="checkBoxT2P4" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='19' x:Name="checkBoxT2P5" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+                        <CheckBox x:ConnectionId='20' x:Name="checkBoxT2P6" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Stretch"   VerticalAlignment="Center" IsChecked="True"                           />
+
+                    </Grid>
+                </RelativePanel>
+
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Left" Text="Artūrs Ardavs RDBR011 II DITF RTU" FontSize="14"/>
+        </StackPanel>
+
+
+
 
     </Grid>
-    
+
 </Page>
 
