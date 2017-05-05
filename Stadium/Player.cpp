@@ -7,7 +7,7 @@
 #include "Ball.h"
 //#include "mainpage.h"
 #include "Referee.h"
-#include "functions.h"
+#include "Functions.h"
 //#include <mmsystem.hpp>
 #include "MainPage.xaml.h"
 #include "Game.h"
@@ -16,7 +16,7 @@ using namespace std;
 
 //extern TFG_Frm *FG_Frm;
 //extern MainPage^ mainpage;
-Player::Player(CanvasRenderTarget^ offScreen,int t, int n):Human(offScreen)
+Player::Player(CanvasCommandList^ offScreen,int t, int n):Human(offScreen)
 {
 	//offscreen = offScreen;
 	teamNo = t;
@@ -60,18 +60,18 @@ void Player::draw()
 	//aCanvas->Font = font;
 	//aCanvas->Brush->Style = bsClear;
 	//aCanvas->TextOutA(x - r + 1, y - r, IntToStr(No));
-	CanvasDrawingSession^ clds = offscreen->CreateDrawingSession();
+	CanvasDrawingSession^ clds = game->clds;// offscreen->CreateDrawingSession();
 	clds->DrawText((No.ToString()),x-r+1, y-r,Colors::Black);
-
-	delete clds;
+	//clds->DrawGeometry
+	//delete clds;
 	
-//	switch (sound) {
-	//case 0: break;
-	//case 1: FG_Frm->sound("kick1.wav", SND_ASYNC); break;
-	//case 2: FG_Frm->sound("kick2.wav", SND_ASYNC); break;
-	//case 3: FG_Frm->sound("kick3.wav", SND_ASYNC); break;
+	switch (sound) {
+	case 0: break;
+	case 1: game->sound("kick1.wav"); break;
+	case 2: game->sound("kick2.wav"); break;
+	case 3: game->sound("kick3.wav"); break;
 		
-	//};
+	};
 	if (sound) {
 		game->coment = "Team " + teamNo +
 			", No. " + No;
@@ -92,7 +92,7 @@ void Player::move()
 	bool ownSide = (teamNo == 1 && x<xc) || (teamNo == 2 && x>xc);
 	if (ownSide && distance(x, y, xb, yb)>150) yd = disperse(y, 50);
 	energy = energy>0 ? --energy : 0;
-	speed = 2 + rand() % 4;//(energy / 1000);          //?? pareizs diapazons?
+	speed = 5 +rand() % (energy / 1000+1);          //?? pareizs diapazons?
 
 	dir = direction(x, y, xd, yd);
 	dir = disperse(dir, PI / 12);
@@ -100,7 +100,7 @@ void Player::move()
 	x += speed*cos(dir);
 	y -= speed*sin(dir);
 
-	//avoidCollision();
+	avoidCollision();
 
 	if (distance(x, y, xb, yb)<close) kick();
 }
@@ -142,13 +142,13 @@ void Player::kick()
 	dirb = direction(xb, yb, xd, yd);
 	dirb = disperse(dirb, PI / 24);
 	game->ball->setDir(dirb);
-	game->ball->setSpeed(speedb/4); //edit
+	game->ball->setSpeed(speedb/2); //edit
 	sound = 2;
 }
 
 void Player::avoidCollision()
 {
-	int lim = 5 * r;
+	int lim = 3 * r;
 	int nPos = game->Team1.size() + game->Team2.size();
 	Point* occupiedPos = new Point[nPos];
 
@@ -170,7 +170,7 @@ void Player::avoidCollision()
 	occupiedPos[j].X = game->referee->getPos().X;
 	occupiedPos[j].Y = game->referee->getPos().Y;
 
-	int attempts = 10000;
+	int attempts = 100;
 	bool tooClose;
 	int xa = x, ya = y, speeda = speed;
 	double dira = dir;
@@ -182,14 +182,20 @@ void Player::avoidCollision()
 			dist = distance(xa, ya, occupiedPos[i].Y, occupiedPos[i].Y);
 			if (tooClose) {
 				--attempts;
-				speeda = speeda + dist - lim;//disperse(speed, lim);
-				dira = disperse(dir, PI / 12);
+				speeda = disperse(speeda, lim);
+				if (speeda < 2) speeda = 1;
+				if (speeda > 10) speeda = 10;
+ 				dira = disperse(dir, PI /2);
 				xa = x + speeda*cos(dira);
 				ya = y - speeda*sin(dira);
 				break;
 			}
 		}
 	} while (tooClose && attempts>0);
+	//char buf[25];
+	//	sprintf_s(buf, "attmp  %d \n", attempts);
+
+	//OutputDebugStringA(buf);
 	x = xa;
 	y = ya;
 	speed = speeda;

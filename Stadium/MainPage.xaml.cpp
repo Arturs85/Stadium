@@ -9,8 +9,11 @@
 #include "Field.h"
 #include "Game.h"
 #include <math.h>
-
-
+#include <Windows.h>
+#include <MMSystem.h>
+#include <experimental\resumable>
+#include <pplawait.h>
+#pragma comment(lib, "Winmm.lib")
 using namespace Stadium;
 using namespace std;
 using namespace Platform;
@@ -27,33 +30,33 @@ using namespace Windows::UI;
 using namespace Microsoft::Graphics::Canvas;
 using namespace Microsoft::Graphics::Canvas::Effects;
 using namespace Windows::Foundation::Numerics;
-
+using namespace concurrency;
+using namespace Windows::Storage;
+using namespace Windows::Storage::Streams;
+using namespace Windows::Media::Playback;
+using namespace Windows::Media::Core ;
+using namespace Windows::ApplicationModel::Core;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-int MainPage::radius1 = 100;
-bool dirFWd = true;
-//Ball^ MainPage::ball; 
-//MainPage^ mainpage;
+
 Game* game;
+MediaElement^ mysong;
+
 MainPage::MainPage()
 {
 	InitializeComponent();
-	//mainpage = this;
+
 	prescaler = 4;
-	//mainpage = this;
+	mysong = ref new MediaElement();
+
 }
  
 void Stadium::MainPage::inputButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	//game->gameState = sRunning;
-	//game->ball->setSpeed(30);
-	//game->ball->setDir(PI /5- 0.1);
-	//game->assRef1->moveTo(500, game->field->getBorderW() / 2 + 2);
-	//game->assRef2->moveTo(550, 3 * game->field->getBorderW() / 2 + game->field->getH() - 2);
+
 	game->startGame();
 	game->coment = "Started";
 }
-
 
 void Stadium::MainPage::canvas_Draw(Microsoft::Graphics::Canvas::UI::Xaml::CanvasControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasDrawEventArgs^ args)
 {	
@@ -65,35 +68,21 @@ void Stadium::MainPage::Page_Unloaded(Platform::Object^ sender, Windows::UI::Xam
 {
 	this->canvas->RemoveFromVisualTree();
 	delete this->canvas;
-		delete smartball;
-
-	//delete ball;
-	//delete field;
+	
 		delete game;
 }
 
 
 void Stadium::MainPage::canvas_Draw_1(Microsoft::Graphics::Canvas::UI::Xaml::ICanvasAnimatedControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedDrawEventArgs^ args)
 {
-	args->DrawingSession->DrawImage(cl,30,150); // iznest kaa statiskos const mainiigos
+		args->DrawingSession->DrawImage(cl,30,150); // iznest kaa statiskos const mainiigos
+		game->offscreen = ref new CanvasCommandList(sender);
+		game->clds = game->offscreen->CreateDrawingSession();
+		game->drawAll();
+		delete game->clds;
+		args->DrawingSession->DrawImage(game->offscreen,30,150); //kustiigo objektu bilde jaaziimee 50 px nobiidiita
 	
-	//args->DrawingSession->FillCircle(ball->x,300,22,Colors::Crimson );
-	/*game->ball->draw();
-	game->referee->draw();
-	game->assRef1->draw();
-	game->assRef2->draw();
-	for (int i = 0; i < game->Team1.size(); i++)
-		game->Team1[i]->draw();
-	for (int i = 0; i < game->Team2.size(); i++)
-		game->Team2[i]->draw();
-
-	smartball->draw();*/
-	game->drawAll();
-	args->DrawingSession->DrawImage(offscreen,30,150); //kustiigo objektu bilde jaaziimee 50 px nobiidiita
-	CanvasDrawingSession^ 	clds=offscreen->CreateDrawingSession();
-	clds->Clear(Colors::Transparent);
-	delete clds;
-	//Core::CoreDispatcher::RunAsync()
+		   delete game-> offscreen;
 	
 	Windows::ApplicationModel::Core::CoreApplication::MainView->CoreWindow->Dispatcher->RunAsync(
 		Core::CoreDispatcherPriority::Normal,
@@ -110,19 +99,31 @@ void Stadium::MainPage::canvas_Draw_1(Microsoft::Graphics::Canvas::UI::Xaml::ICa
 	}));
 }
 
-
 void Stadium::MainPage::canvas_CreateResources(Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ sender, Microsoft::Graphics::Canvas::UI::CanvasCreateResourcesEventArgs^ args)
 {
 	//sender->TargetElapsedTime.Duration=(long long)9;
 	canvasAnimatedControl = sender;
 	//device = CanvasDevice::GetSharedDevice();
 	cl = ref new CanvasCommandList(sender);
-	offscreen = ref new CanvasRenderTarget(sender,880, 580,96);  //varbuut jaadzeess
-	game = new Game(offscreen,cl,sender);
-	game->initialize(); // rada dalībniekus
+	//offscreen = ref new CanvasRenderTarget(sender,880, 580,96);  //varbuut jaadzeess
+		offscreen = ref new CanvasCommandList(sender);  //varbuut jaadzeess
+
 	
+	game = new Game(offscreen,cl,sender,mysong);
+	game->initialize(); // rada dalībniekus
+	 
+	//StorageFolder^ storageFolder = ApplicationData::Current->LocalFolder;
+	//concurrency::create_task(storageFolder->CreateFileAsync("sample1902.txt", CreationCollisionOption::ReplaceExisting));
 
+	TimeSpan timeSpan = canvas->TargetElapsedTime;
 
+	timeSpan.Duration = 300000;
+	//textBlock->Text = e->NewValue + " tS= " + timeSpan.Duration;
+
+	canvas->TargetElapsedTime = timeSpan; //->TargetElapsedTime.Duration = 12;
+		
+
+	
 
 	//game->field = new Field();
 	//game->ball = new Ball(offscreen,game->field,5);
@@ -207,10 +208,10 @@ void Stadium::MainPage::canvas_Update(Microsoft::Graphics::Canvas::UI::Xaml::ICa
 	
 	//Core::CoreWindow::GetForCurrentThread()->Activate();
 	//Core::CoreWindow::GetForCurrentThread()->Dispatcher->ProcessEvents(Core::CoreProcessEventsOption::ProcessUntilQuit);
-	//if (prescaler++ >= 2) {
-	//	prescaler = 0;
+	if (prescaler++ >= 2) {
+		prescaler = 0;
 		if (game->gameState != sStop) { //pagaidu parbaude
-		
+
 			game->simulationStep();
 			/*game->ball->move();
 		game->referee->move();
@@ -220,8 +221,8 @@ void Stadium::MainPage::canvas_Update(Microsoft::Graphics::Canvas::UI::Xaml::ICa
 			game->Team1[i]->move();
 		for (int i = 0; i < game->Team2.size(); i++)
 			game->Team2[i]->move();*/
+		}
 	}
-
 	//smartball->move();
 }
 
@@ -231,7 +232,7 @@ void Stadium::MainPage::slider_ValueChanged(Platform::Object^ sender, Windows::U
 	TimeSpan timeSpan = canvas->TargetElapsedTime;
 	
 	timeSpan.Duration = (101-e->NewValue) * 3000+8000;
-		textBlock->Text = e->NewValue +" tS= "+timeSpan.Duration ;
+		//textBlock->Text = e->NewValue +" tS= "+timeSpan.Duration ;
 
 	canvas->TargetElapsedTime = timeSpan; //->TargetElapsedTime.Duration = 12;
 }
@@ -305,3 +306,16 @@ void Stadium::MainPage::checkBoxT2P6_Click(Platform::Object^ sender, Windows::UI
 	game->Team2[5]->inGame = checkBoxT2P6->IsChecked->Value;
 }
 
+
+void Stadium::MainPage::checkBoxSound_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{	
+	game->soundChecked= checkBoxSound->IsChecked->Value;
+
+}
+
+
+void Stadium::MainPage::checkBoxPauseShow_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	game->pShowChecked = checkBoxPauseShow->IsChecked->Value;
+
+}

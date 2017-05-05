@@ -7,6 +7,8 @@
 #include "Functions.h"
 #include "MainPage.xaml.h"
 //==================================
+using namespace Windows::Foundation::Numerics;
+using namespace Microsoft::Graphics::Canvas::Geometry;
 
 int distance(int x1, int y1, int x2, int y2)
 {
@@ -30,7 +32,7 @@ double disperse(double direction, double delta)
 	return direction + k*p*delta;
 }
 
-void angellipse(CanvasRenderTarget^ offscreen, int xc, int yc, int r, double a1, double a2, double ang, double ear)
+void angellipse(CanvasDrawingSession^ clds, int xc, int yc, int r, double a1, double a2, double ang, double ear)
 {
 	float angr, cosang, sinang, r1, r2, x1, y1, da, a;
 	int x, y;
@@ -38,7 +40,8 @@ void angellipse(CanvasRenderTarget^ offscreen, int xc, int yc, int r, double a1,
 	if (a1>a2) { a = a1; a1 = a2; a2 = a; }
 	da = PI / 200; //0.0698128;
 	int np = (a2 - a1) / da + 2;
-	Point *poly = new Point[np];
+	//Point *poly = new Point[np];
+	Platform::Array<float2>^ poly = ref  new Platform::Array<float2>(np);
 	r1 = r; r2 = r*ear;
 
 	ang = -ang;
@@ -47,21 +50,20 @@ void angellipse(CanvasRenderTarget^ offscreen, int xc, int yc, int r, double a1,
 	x1 = r1*cos(a1); y1 = r2*sin(a1);
 	x = x1*cosang - y1*sinang + xc;
 	y = (x1*sinang + y1*cosang)*Spic_AR + yc;
-	poly[0].X = x;
-	poly[0].Y = y;
+	poly[0].x = x;
+	poly[0].y = y;
 	int i = 1;
-	for (a = a1 + da; a <= a2; a += da) {
+	for (a = a1 + da+1; a < a2; a += da) {
 		x1 = r1*cos(a); y1 = r2*sin(a);
 		x = x1*cosang - y1*sinang + xc;
 		y = (x1*sinang + y1*cosang)*Spic_AR + yc;
-		poly[i].X = x;
-		poly[i].Y = y;
+		poly[i].x = x;
+		poly[i].y = y;
 		++i;
 	}
 	
 	//CanvasDrawingSession^ clds = offscreen->CreateDrawingSession();
-	//clds->dr FillCircle(x, y, r, color);
-
+	clds->FillGeometry(CanvasGeometry::CreatePolygon(clds, poly), Colors::LightGreen);
 	//delete clds;
 	
 	//offscreen->Polygon(poly, i - 1);

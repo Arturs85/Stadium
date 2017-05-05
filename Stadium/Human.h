@@ -25,9 +25,9 @@ protected:
 	int speed;
 	int energy;
 	double dir;
-	CanvasRenderTarget^ offscreen;
+	CanvasCommandList^ offscreen;
 public:
-	Human(CanvasRenderTarget^);
+	Human(CanvasCommandList^);
 	Human();
 	htype type;
 	void setSpeed(int s) { speed = s; }

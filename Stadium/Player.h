@@ -14,7 +14,7 @@ protected:
 	int sound;
 	//CanvasRenderTarget^ offscreen;
 public:
-	Player(CanvasRenderTarget^ offScreen, int t, int n);
+	Player(CanvasCommandList^ offScreen, int t, int n);
 	Player(int t, int n);
 	virtual void move();
 	virtual void draw();

@@ -8,7 +8,6 @@ using namespace std;
 #include "MainPage.g.h"
 #include "Ball.h"
 #include "Field.h"
-#include "SmartBall.h"
 #include "Player.h"
 #include "Referee.h"
 #include "Goalkeeper.h"
@@ -23,7 +22,6 @@ class Game;
 class Referee;
 class Player;
 class Goalkeeper;
-
 
 #define PI 3.1415926535897932385
 //enum state { sStop, sRunning, sPause, sGoal, sRestartGame, sFirstKick };
@@ -47,13 +45,13 @@ namespace Stadium
 
 	
 	private:
+		//MediaElement^ mysong;
 		Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ canvasAnimatedControl;
-		SmartBall* smartball;
 		Microsoft::Graphics::Canvas::CanvasCommandList^ cl;
 		CanvasDevice^ device; 
-		CanvasRenderTarget^ offscreen;	
+		CanvasCommandList^ offscreen;	
 		static	int radius1;
-		
+		Windows::Media::Playback::MediaPlayer^ _mediaPlayer;
 		void inputButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void canvas_Draw(Microsoft::Graphics::Canvas::UI::Xaml::CanvasControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasDrawEventArgs^ args);
 		void Page_Unloaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -73,7 +71,10 @@ namespace Stadium
 		void checkBoxT2P4_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void checkBoxT2P5_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void checkBoxT2P6_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		void checkBoxSound_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void checkBoxPauseShow_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
-	
+
 }extern Game* game;
 //extern MainPage^ mainpage;

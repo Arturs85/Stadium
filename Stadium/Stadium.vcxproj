@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.props" Condition="Exists('..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.props')" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9076d637-2ba8-4126-b34a-de25435d27c9}</ProjectGuid>
     <RootNamespace>Stadium</RootNamespace>
@@ -113,9 +114,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /await %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -147,6 +151,7 @@
     <ClInclude Include="Goalkeeper.h" />
     <ClInclude Include="HalfBack.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="Lights.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -156,7 +161,7 @@
     </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="Referee.h" />
-    <ClInclude Include="SmartBall.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -197,6 +202,7 @@
     <ClCompile Include="Goalkeeper.cpp" />
     <ClCompile Include="HalfBack.cpp" />
     <ClCompile Include="Human.cpp" />
+    <ClCompile Include="Lights.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
@@ -210,16 +216,29 @@
     </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Referee.cpp" />
-    <ClCompile Include="SmartBall.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Stadium.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\Kick1.wav" />
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\Kick2.wav" />
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\Kick3.wav" />
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\mencheer.wav" />
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\successtada.wav" />
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\whistle.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\Win2D.uwp.1.20.0\build\native\Win2D.uwp.targets" Condition="Exists('..\packages\Win2D.uwp.1.20.0\build\native\Win2D.uwp.targets')" />
+    <Import Project="..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.targets" Condition="Exists('..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Win2D.uwp.1.20.0\build\native\Win2D.uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Win2D.uwp.1.20.0\build\native\Win2D.uwp.targets'))" />
+    <Error Condition="!Exists('..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.props'))" />
+    <Error Condition="!Exists('..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_uwp.2017.4.24.1\build\native\directxtk_uwp.targets'))" />
   </Target>
 </Project>

@@ -10,7 +10,7 @@
 
 //using namespace Stadium;
 
-Human::Human(CanvasRenderTarget^ offScreen)
+Human::Human(CanvasCommandList^ offScreen)
 {
 	this->offscreen = offScreen;
 	r = 3;
@@ -37,10 +37,10 @@ void Human::moveTo(int xTo, int yTo)
 
 void Human::draw()
 {
-	CanvasDrawingSession^ clds = offscreen->CreateDrawingSession();
+	CanvasDrawingSession^ clds = game->clds;//offscreen->CreateDrawingSession();
 	clds->FillCircle(x, y, r, color);
 	
-	delete clds;
+	//delete clds;
 	
 
 }

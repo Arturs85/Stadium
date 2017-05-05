@@ -19,16 +19,16 @@ protected:
 	double dir;
 	Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ mCanvasControl;
 	//CanvasDevice ^ comandList;
-	CanvasDrawingSession^ 	clds;
-	CanvasRenderTarget^ offscreen;
+	//CanvasDrawingSession^ 	clds;
+	CanvasCommandList^ offscreen;
 	//TCanvas *aCanvas;
 public:
 	Field* field;
 
-	virtual ~Ball() { delete clds; delete offscreen; }
+	virtual ~Ball() {  delete offscreen; }
 	int x;
 	Ball();
-	Ball(Microsoft::Graphics::Canvas::CanvasRenderTarget^ ,Field* field,int r);
+	Ball(Microsoft::Graphics::Canvas::CanvasCommandList^ );
 	void setSpeed(int s) { speed = s; }
 	int getSpeed() { return speed; }
 	void setDir(double d) { dir = d; }

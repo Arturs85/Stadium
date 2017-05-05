@@ -190,11 +190,15 @@ void ::Stadium::MainPage::Connect(int __connectionId, ::Platform::Object^ __targ
         case 27:
             {
                 this->checkBoxPauseShow = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->checkBoxPauseShow))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Stadium::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::checkBoxPauseShow_Click);
             }
             break;
         case 28:
             {
                 this->checkBoxSound = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->checkBoxSound))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Stadium::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::checkBoxSound_Click);
             }
             break;
         case 29:

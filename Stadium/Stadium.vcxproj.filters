@@ -21,7 +21,6 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Field.cpp" />
-    <ClCompile Include="SmartBall.cpp" />
     <ClCompile Include="Human.cpp">
       <Filter>Humans</Filter>
     </ClCompile>
@@ -53,6 +52,7 @@
     <ClCompile Include="Girl.cpp">
       <Filter>Humans</Filter>
     </ClCompile>
+    <ClCompile Include="Lights.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -60,7 +60,6 @@
     <ClInclude Include="MainPage.xaml.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Field.h" />
-    <ClInclude Include="SmartBall.h" />
     <ClInclude Include="Human.h">
       <Filter>Humans</Filter>
     </ClInclude>
@@ -92,6 +91,8 @@
     <ClInclude Include="Girl.h">
       <Filter>Humans</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Lights.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
@@ -125,5 +126,28 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Stadium.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\Kick3.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\successtada.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\Kick1.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\Kick2.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\mencheer.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Oop\Football_0\Football_G6_Full_version_CLEAN\whistle.wav">
+      <Filter>Assets</Filter>
+    </Media>
   </ItemGroup>
 </Project>

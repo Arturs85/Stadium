@@ -15,11 +15,12 @@ enum state { sStop, sRunning, sPause, sGoal, sRestartGame, sFirstKick };
 class Referee;
 class Player;
 class Girl;
+class Lights;
 
 class Game
 {
 public:
-	Game(CanvasRenderTarget^ offscreen,CanvasCommandList^ cl, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ cac);
+	Game(CanvasCommandList^ offscreen,CanvasCommandList^ cl, Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ cac, Windows::UI::Xaml::Controls::MediaElement^ mysong);
 	~Game();
 	//MainPage^ mainpage;
 	int scoreL;
@@ -33,11 +34,15 @@ public:
 	AssReferee *assRef2;
 
 	Girl *girl[5];
+	Lights *lights[2];
+
 	vector<Player*> Team1;
 	vector<Player*> Team2;
 	state gameState;
+	//MediaElement^ mysong;
+	CanvasDrawingSession^ 	clds;
 
-	CanvasRenderTarget^ offscreen;
+	CanvasCommandList^ offscreen;
 	Microsoft::Graphics::Canvas::CanvasCommandList^ cl;
 	Microsoft::Graphics::Canvas::UI::Xaml::CanvasAnimatedControl^ cac;
 	void initialize();
@@ -49,11 +54,13 @@ public:
 	void position2();
 	void simulationStep();
 	void energyControl();
-
+	void sound(Platform::String ^ fileName);
 int time;
 int enL = 0, enR = 0;
+bool pShowChecked = false;
+bool soundChecked = false;
 private:
-	
+	//std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 
 
 	//SmartBall* smartball;

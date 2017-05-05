@@ -102,12 +102,12 @@ void Field::draw()
 
 void Field::drawLines()  //atseviðíi zîmç vârtu tîklu,lai to varçtu uzzîmçt virs spçletâjiem 
 {
-	CanvasDrawingSession^ 	clds =game->offscreen->CreateDrawingSession();
+	CanvasDrawingSession^ 	clds = game->clds;// offscreen->CreateDrawingSession();
 	clds->DrawRectangle(Rect(0, y_c - goalWidth / 2, borderWidth, goalWidth ), Colors::AntiqueWhite);
 	clds->FillRectangle(Rect(0, y_c - goalWidth / 2, borderWidth, goalWidth ),goalNetBrush);
 	clds->DrawRectangle(Rect(fieldRect->Right, y_c - goalWidth / 2, borderWidth, goalWidth ),Colors::AntiqueWhite);
 	clds->FillRectangle(Rect(fieldRect->Right, y_c - goalWidth / 2, borderWidth, goalWidth), goalNetBrush);
-	delete clds;
+	//delete clds;
 	/*aCanvas->Brush->Style = bsClear;
 	aCanvas->Pen->Color = clWhite;
 	aCanvas->Rectangle(*fieldRect);

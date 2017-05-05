@@ -13,18 +13,18 @@ using namespace std;
 
 //extern  MainPage^ mainpagee;
 
-Ball::Ball(Microsoft::Graphics::Canvas::CanvasRenderTarget^ ofscreen,Field* field,int r)
+Ball::Ball(Microsoft::Graphics::Canvas::CanvasCommandList^ ofscreen)
 {
 	
 	this->offscreen = ofscreen;
-	this->field = field;
-	this->r = r;
+
+	r = 3;
 	x = 200;
 	y = 200;
 
 	//color = Colors::Yellow;
 	speed = 0;
-	slowdown = 1;
+	slowdown = 3;
 	dir = 0;
 	//comandList = ref new CanvasCommandList(sender);
 	 	//clds = offscreen->CreateDrawingSession();
@@ -34,10 +34,12 @@ Ball::Ball(Microsoft::Graphics::Canvas::CanvasRenderTarget^ ofscreen,Field* fiel
 
 void Ball::draw()
 {
-	clds = offscreen->CreateDrawingSession();
-	clds->FillCircle(x, y, r, Colors::Crimson);
+	//game->offscreen = ref new CanvasCommandList(game->cac);
+	CanvasDrawingSession ^ clds = game->clds;//offscreen->CreateDrawingSession();
+	clds->Clear(Colors::Transparent);// vai vajag?
+	clds->FillCircle(x, y, r, Colors::Lavender);
 	//clds->(IDisposable)Dispose();
-	delete clds;
+	//delete clds;
 
 	//return offscreen;
 	//aCanvas->Pen->Color = color;
